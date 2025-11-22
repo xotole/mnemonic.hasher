@@ -25,9 +25,12 @@
 <meta id="dcngeagmmhegagicpcmpinaoklddcgon"></head>
 <body>
     <h1>Lock your seeds with an password (BP39 word list)</h1>
-    <input type="password" id="password" maxlength="10" placeholder="Password of max 10char">
-    <button onclick="shuffleSeeds()">Lock!</button>
-    <button onclick="window.print()">Print</button>
+    <form onsubmit="handleSubmit(event)">
+        <input type="password" id="password" maxlength="10" placeholder="Password of max 10char">
+        <button type="button" onclick="togglePassword()">Show</button>
+        <button type="submit">Lock!</button>
+        <button onclick="window.print()">Print</button>
+    </form>
     <table id="seedsTable">
         <thead>
             <tr id="headerRow"><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th><th>Label</th><th>Seed</th></tr>
@@ -267,7 +270,8 @@ function generateLabel(index) {
     }
 }
 
-        async function shuffleSeeds() {
+        async function handleSubmit(e) {
+            e.preventDefault()
             password = document.getElementById("password").value;
             if (!password || password.length > 10) {
                 alert("Password must be max of 10 char.");
@@ -303,6 +307,19 @@ function generateLabel(index) {
         }
 
         window.onload = generateTable;
+
+    function togglePassword() {
+      const input = document.getElementById("password");
+      const button = event.target;
+
+      if (input.type === "password") {
+        input.type = "text";
+        button.textContent = "Hide";
+      } else {
+        input.type = "password";
+        button.textContent = "Show";
+      }
+    }
     </script>
 
 
